@@ -1,9 +1,9 @@
 <?php 
 if (isset($_POST['submit'])) {
-    if (isset($_POST['username']) && isset($_POST['codigo'])) {
+    if (isset($_POST['username'])) {
         
         $username = $_POST['username'];
-        $codigo = $_POST['codigo'];
+       
 
         $host = "localhost";
         $dbUsername = "root";
@@ -26,14 +26,8 @@ if (isset($_POST['submit'])) {
         
        
         if($username==$pregDef){
-            if($codigo=="X2X2X2"){
-                echo "El codigo es correcto";
-                header("Location: CambiarContra.html");
-                        die();  
-            }
-            else{
-                echo "El codigo es incorrecto";
-            }
+            header("Location: corroborar.html");
+            die();  
             
         }else{
             echo "El usuario no existe";

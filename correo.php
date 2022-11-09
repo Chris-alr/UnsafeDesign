@@ -1,9 +1,10 @@
 <?php 
 if (isset($_POST['submit'])) {
-    if (isset($_POST['username']) ) {
+    if (isset($_POST['username']) && isset($_POST['pregunta'])) {
         
-       
         $username = $_POST['username'];
+        $pregunta = $_POST['pregunta'];
+      
 
         $host = "localhost";
         $dbUsername = "root";
@@ -11,39 +12,67 @@ if (isset($_POST['submit'])) {
         $dbName = "form";
 
 
-     
-       
-
+      
         $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
-        $sql = "SELECT email FROM `registro` WHERE username = '$username';";
+      
 
-        $result = mysqli_query($conn,$sql);
+      $msql = "SELECT pregunta FROM `registro` WHERE username = '$username';";
 
-        $user = mysqli_fetch_row($result);
+      $result = mysqli_query($conn,$msql);
 
-        $userDef = $user[0];
-        
-       //  Aqui deberia enviar un correo electronico a la direccion asociada con el usuario
-    
+      $preg = mysqli_fetch_row($result);
+
+      $pregDef = $preg[0];
+
+      $sql = "SELECT username FROM `registro` WHERE username = '$username';";
+
+      $results = mysqli_query($conn,$sql);
+
+      $user = mysqli_fetch_row($results);
+
+      $userDef = $user[0];
+      
+      
      
-            header("Location: corroborar.html");
-                    die();  
-        
-      
-
-        if ($conn->connect_error) {
-            die('No se pudo conectar a la BD');
-        }
-        else {
-
-        ;
-      
+      if($username==$userDef){
+        if($pregunta==$pregDef){
             
+            header("Location: CambiarContra.html");
+                        die();  
            
-    }
-    }
+           
+          }else{
+            echo '<script>alert("Las contraseñas no coinciden")</script>';
+           
+            header("Location: corroborar.html");
+            die();  
+          }
+        
+          
+      }else{
+          echo "El usuario no existe";
+      }
+    
+
+        
+   
+    mysqli_close($conn);
 }
+
+}
+    else {
+        echo "Todos los campos son requeridos";
+        die();
+    }
+
+ 
+
 
 
 
 ?>
+<html>
+<a href="http://localhost/demo/index.html">
+   <input type="button" value="Volver a registro" />
+</a>
+</html>

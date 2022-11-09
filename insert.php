@@ -6,7 +6,7 @@
 if (isset($_POST['submit'])) {
     if (isset($_POST['username']) && isset($_POST['password']) &&
         isset($_POST['gender']) && isset($_POST['email']) &&
-        isset($_POST['phoneCode']) && isset($_POST['phone'])) {
+        isset($_POST['phoneCode']) && isset($_POST['phone'])&& isset($_POST['pregunta'])) {
         session_start();
 
         
@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
         $email = $_POST['email'];
         $phoneCode = $_POST['phoneCode'];
         $phone = $_POST['phone'];
-        
+        $pregunta = $_POST['pregunta'];
 
         
 
@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
         }
         else {
             $Select = "SELECT email FROM registro WHERE email = ? LIMIT 1";
-            $Insert = "INSERT INTO registro(username, password, gender, email, phoneCode, phone) values(?, ?, ?, ?, ?, ?)";
+            $Insert = "INSERT INTO registro(username, password, gender, email, phoneCode, phone,pregunta) values(?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $conn->prepare($Select);
             $stmt->bind_param("s", $email);
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
                 $stmt->close();
 
                 $stmt = $conn->prepare($Insert);
-                $stmt->bind_param("ssssii",$username, $hashedPass, $gender, $email, $phoneCode, $phone);
+                $stmt->bind_param("ssssiis",$username, $hashedPass, $gender, $email, $phoneCode, $phone,$pregunta);
                 if ($stmt->execute()) {
                     echo "Registro guardado exitosamente";
                 }
