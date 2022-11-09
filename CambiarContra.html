@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <h1 align="center">Cambiar Contrasena</h1>
+</head>
+<body>
+ <form action="cambiarContra.php" method="POST">
+  <table class="tablita" align="center" >
+
+    <tr>
+      <td>Nombre de Usuario:</td>
+      <td><input type="text" name="username" required></td>
+     </tr>
+   <tr>
+    <td>Contrasena Nueva :</td>
+    <td><input type="password" name="password" required></td>
+   </tr>
+   <tr>
+    <td>Repetir Contrasena :</td>
+    <td><input type="password" name="passwordR" required></td>
+   </tr>
+   
+   <tr>
+    <td><input type="submit" value="Submit" name="submit"></td>
+   </tr>
+  </table>
+ </form>
+</body>
+</html>
+<style>
+.tablita{
+  margin-top: 50px;
+  margin-left: 200px;
+  font-size: x-large;
+  align-self: center;
+}
+</style>
